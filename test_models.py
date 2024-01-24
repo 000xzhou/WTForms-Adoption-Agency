@@ -34,7 +34,6 @@ class PetModelCase(TestCase):
             self.assertEqual(pet.age, 15)
             self.assertEqual(pet.notes, "some notes")
             self.assertEqual(pet.available, True)
-            db.session.delete(pet)
 
         
 if __name__ == "__main__":

@@ -19,7 +19,9 @@ with app.app_context():
     
 @app.route('/')
 def homepage():
-    return "list of pets - name, photo, available"
+    pets = Pet.query.all()
+    print(pets)
+    return render_template('homepage.html', pets=pets)
 
 if __name__ == '__main__':
     app.run(debug=True)
