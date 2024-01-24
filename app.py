@@ -20,7 +20,6 @@ with app.app_context():
 @app.route('/')
 def homepage():
     pets = Pet.query.all()
-    print(pets)
     return render_template('homepage.html', pets=pets)
 
 if __name__ == '__main__':
