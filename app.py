@@ -3,8 +3,7 @@ from models import db, connect_db, Pet
 from dotenv import load_dotenv
 load_dotenv()
 import os
-from forms import AddPetForm
-
+from forms import AddPetForm, EditPetForm
 app = Flask(__name__)
 secret_key = os.environ.get('SECRET_KEY')
 database_uri = os.environ.get('DATABASE_URL')
@@ -24,7 +23,7 @@ def homepage():
     pets = Pet.query.all()
     return render_template('homepage.html', pets=pets)
 
-@app.route('pets/add', methods=['GET', 'POST'])
+@app.route('/pets/add', methods=['GET', 'POST'])
 def add_pet():
     # Add Pet Form
     form = AddPetForm()
@@ -41,7 +40,20 @@ def add_pet():
     else:
         return render_template(
             "add_pet_form.html", form=form)
-
+        
+@app.route('/pets/<pet_id>', methods=['GET', 'POST'])
+def edit_pet(pet_id):
+    pet = Pet.query.get(pet_id)
+    form = EditPetForm()
+    if form.validate_on_submit():
+        pet.photo_url = form.photo_url.data
+        pet.notes = form.notes.data
+        pet.available = form.available.data
+        db.session.commit()
+        return redirect("/")
+    else:
+        return render_template(
+            "edit_pet_form.html", form=form, pet=pet)
 
 
 if __name__ == '__main__':
