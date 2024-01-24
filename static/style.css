@@ -6,3 +6,9 @@
   border: 1px solid salmon;
   margin-block: 1rem;
 }
+
+.form-box {
+  border: 1px solid salmon;
+  margin-block: 1rem;
+  padding: 1rem;
+}

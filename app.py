@@ -3,6 +3,7 @@ from models import db, connect_db, Pet
 from dotenv import load_dotenv
 load_dotenv()
 import os
+from forms import AddPetForm
 
 app = Flask(__name__)
 secret_key = os.environ.get('SECRET_KEY')
@@ -19,8 +20,29 @@ with app.app_context():
     
 @app.route('/')
 def homepage():
+    # Homepage Listing Pets
     pets = Pet.query.all()
     return render_template('homepage.html', pets=pets)
+
+@app.route('/add', methods=['GET', 'POST'])
+def add_pet():
+    # Add Pet Form
+    form = AddPetForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        species = form.species.data
+        photo_url = form.photo_url.data
+        age = form.age.data
+        notes = form.notes.data
+        pet = Pet(name=name, species = species, photo_url=photo_url, age=age, notes=notes)
+        db.session.add(pet)
+        db.session.commit()
+        return redirect("/")
+    else:
+        return render_template(
+            "add_pet_form.html", form=form)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
