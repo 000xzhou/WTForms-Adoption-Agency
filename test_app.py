@@ -13,7 +13,7 @@ class UserFlaskCase(TestCase):
         """Set up Flask application context and configuration."""
         cls.app = app
         cls.app.config['TESTING'] = True
-        cls.app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+        cls.app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL_TEST')
         cls.app.config['SQLALCHEMY_ECHO'] = False
         app.config['WTF_CSRF_ENABLED'] = False
         cls.client = cls.app.test_client()
@@ -30,6 +30,8 @@ class UserFlaskCase(TestCase):
         """Add sample"""
         with self.app.app_context():
             Pet.query.delete()
+            db.session.commit()
+            
             # Add a sample
             pet = Pet(name="Lucky", species="cat", available=False)
             db.session.add(pet)

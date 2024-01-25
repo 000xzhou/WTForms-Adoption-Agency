@@ -10,7 +10,7 @@ class PetModelCase(TestCase):
     def setUp(self):
         self.app = app
         self.app.config['TESTING'] = True
-        self.app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL_TEST')
         self.app.config['SQLALCHEMY_ECHO'] = False
         self.client = self.app.test_client()
         
