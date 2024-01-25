@@ -8,7 +8,7 @@ class AddPetForm(FlaskForm):
     name = StringField("Name", validators=[InputRequired(message="Must include a name")])
     species = SelectField("Species", choices=species_choices)    
     photo_url = StringField("Photo URL", validators=[Optional(), validators.URL(message="Must be a URL")])
-    age = FloatField("Age", validators=[Optional(), validators.NumberRange(min=0, max=30)])
+    age = FloatField("Age", validators=[Optional(), validators.NumberRange(min=0, max=30, message="Age must be between 0 and 30")])
     notes = StringField("Additional Notes", validators=[Optional()])
     
 class EditPetForm(FlaskForm):
