@@ -43,8 +43,10 @@ def add_pet():
         
 @app.route('/pets/<pet_id>', methods=['GET', 'POST'])
 def edit_pet(pet_id):
+    # Display/Edit Form
     pet = Pet.query.get(pet_id)
-    form = EditPetForm()
+    form = EditPetForm(obj=pet)
+    
     if form.validate_on_submit():
         pet.photo_url = form.photo_url.data
         pet.notes = form.notes.data
