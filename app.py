@@ -55,7 +55,7 @@ def edit_pet(pet_id):
         return redirect("/")
     else:
         return render_template(
-            "edit_pet_form.html", form=form, pet=pet)
+            "display_more_pet_info.html", form=form, pet=pet)
 
 
 if __name__ == '__main__':
