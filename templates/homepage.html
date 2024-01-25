@@ -7,9 +7,9 @@ content %} {% for pet in pets %}
   {% if pet.photo_url %}
   <p><img src="{{ pet.photo_url }}" alt="photo of pet" /></p>
   {% endif %} {% if pet.available == True %}
-  <p class="bold">{{ pet.available }}</p>
+  <p class="bold">available</p>
   {% else %}
-  <p>{{ pet.available }}</p>
+  <p>not available</p>
   {% endif %}
 </div>
 {% endfor %} {% endblock %}
