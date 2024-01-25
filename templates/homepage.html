@@ -1,7 +1,9 @@
 {% extends 'base.html' %} {% block title %}Homepage{% endblock %} {% block
 content %} {% for pet in pets %}
 <div class="pet-box">
-  <p>{{ pet.name }}</p>
+  <p>
+    {{ pet.name }} <span><a href="\pets\{{pet.id}}">Edit</a></span>
+  </p>
   {% if pet.photo_url %}
   <p><img src="{{ pet.photo_url }}" alt="photo of pet" /></p>
   {% endif %} {% if pet.available == True %}
